@@ -288,9 +288,8 @@ def main():
     n_sp = sum(1 for e in episodes if e["kind"] == "special")
     n_omake = sum(1 for e in episodes if e["omake"])
     print("-" * 48)
-    print(f"完了: 本編 {n_ep} 話 ／ 特別回 {n_sp} ／ おまけ付き {n_omake}")
+    print(f"変換完了: 本編 {n_ep} 話 ／ 特別回 {n_sp} ／ おまけ付き {n_omake}")
     print("episodes.js を更新しました。")
-    print("次: hanei.bat をダブルクリックするとサイトに反映されます。")
 
 
 if __name__ == "__main__":
