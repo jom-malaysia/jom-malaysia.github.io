@@ -4,6 +4,11 @@ window.SITE = {
   wordmark: "連載マンガ アーカイブ",           // ヘッダー右の小さい文字
   footer: "© Jom! マレーシア！ 連載マンガ",
 
+  /* アクセス解析（Microsoft Clarity）。
+     Clarity で「このサイト用の新規プロジェクト」を作り、Setup画面に出る
+     10文字ほどのプロジェクトIDをここに貼る（例: "abcd1234ef"）。空なら解析なし。 */
+  clarityId: "",
+
   /* タブ「この漫画について」 */
   about: {
     heading: "この漫画について",

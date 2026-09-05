@@ -230,7 +230,7 @@
   .stage{background:var(--stage);padding:8px 0 52px;margin-top:0}
   .stage-in{max-width:920px;margin:0 auto;padding:0 8px;display:flex;flex-direction:column;gap:10px}
   .stage-in img{
-    width:calc(min(100%, 900px) * var(--zoom, 1));
+    width:var(--imgw, 100%);max-width:none;
     height:auto;border-radius:4px;background:#fff;cursor:zoom-in;
   }
   .stage.zoomed{overflow-x:auto;-webkit-overflow-scrolling:touch}
@@ -374,6 +374,15 @@
   "use strict";
   var SITE = window.SITE || {};
   var CHARS = window.CHARACTERS || [];
+
+  /* ---- アクセス解析 (Microsoft Clarity) ---- */
+  if(SITE.clarityId){
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window,document,"clarity","script",SITE.clarityId);
+  }
   var EPS = (window.EPISODES || []).slice().map(function(e){
     var kind = e.kind || "episode";
     var id = (e.id != null) ? String(e.id) : String(e.no);
@@ -457,11 +466,16 @@
   var qEl=document.getElementById("q"), order="new";
   function currentList(){
     var q=qEl.value.trim().toLowerCase();
+    var digits=/^\d+$/.test(q);      // 数字だけの検索 → 話数の完全一致
     var arr=EPS.filter(function(e){
       if(!q) return true;
-      return (e.no!=null && (String(e.no).indexOf(q)>-1 || ("第"+e.no+"話").indexOf(q)>-1))
-        || (e.label && e.label.toLowerCase().indexOf(q)>-1)
-        || (e.title && e.title.toLowerCase().indexOf(q)>-1);
+      if(e.no!=null){
+        if(digits && String(e.no)===q) return true;
+        if(!digits && ("第"+e.no+"話").indexOf(q)>-1) return true;
+      }
+      return (e.label && e.label.toLowerCase().indexOf(q)>-1)
+        || (!isDefTitle(e) && e.title && e.title.toLowerCase().indexOf(q)>-1)
+        || (e.sponsor && e.sponsor.toLowerCase().indexOf(q)>-1);
     });
     return arr.slice().sort(function(a,b){ return order==="new" ? b.sort-a.sort : a.sort-b.sort; });
   }
@@ -524,13 +538,19 @@
   try{ var _z=parseFloat(localStorage.getItem("mz")); if(_z){ var k=ZOOMS.indexOf(_z); if(k>=0) zi=k; } }catch(e){}
   function applyZoom(){
     var z=ZOOMS[zi];
-    stage.style.setProperty("--zoom", z);
+    // 標準（等倍）で表示される幅を基準に、それを z 倍する
+    var fit=Math.min((stageWrap.clientWidth||900)-16, 900);
+    stage.style.setProperty("--imgw", Math.round(fit*z)+"px");
     stageWrap.classList.toggle("zoomed", z>1);
     document.getElementById("zoom-out").disabled=(zi<=0);   // － ＝ 元の大きさに戻す
     document.getElementById("zoom-in").disabled=(zi>=ZOOMS.length-1);
     try{ localStorage.setItem("mz", z); }catch(e){}
   }
   function setZoom(n){ zi=Math.max(0, Math.min(ZOOMS.length-1, n)); applyZoom(); }
+  var _rzT; window.addEventListener("resize", function(){
+    clearTimeout(_rzT);
+    _rzT=setTimeout(function(){ if(document.body.classList.contains("reading")) applyZoom(); }, 150);
+  });
   document.getElementById("zoom-in").addEventListener("click", function(){ setZoom(zi+1); });
   document.getElementById("zoom-out").addEventListener("click", function(){ setZoom(0); });
 
