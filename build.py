@@ -24,6 +24,7 @@ images/ 内のフォルダを全部スキャンして、
     info.txt           ← 任意（タイトル＝表示名、掲載月）
 """
 
+import hashlib
 import io
 import json
 import os
@@ -86,6 +87,15 @@ def parse_info(folder):
         elif key in ("メモ", "note"):
             info["note"] = val
     return info
+
+
+def file_sig(path):
+    """ファイルの署名: [名前, サイズ, 内容のSHA1]。更新時刻に依存しない。"""
+    h = hashlib.sha1()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            h.update(chunk)
+    return [os.path.basename(path), os.path.getsize(path), h.hexdigest()]
 
 
 def normalize_date(s):
@@ -158,7 +168,8 @@ def process_folder(name, cache):
     info = parse_info(folder)
     pages_dir = os.path.join(folder, "_pages")
     info_p = os.path.join(folder, "info.txt")
-    info_mtime = os.path.getmtime(info_p) if os.path.isfile(info_p) else 0
+    # OneDrive等で更新時刻は勝手に変わるので、中身（内容）で判定する
+    info_key = read_text(info_p).strip() if os.path.isfile(info_p) else ""
     cached = cache.get(name)
 
     honpen_file, omake_file = classify_pdfs(folder)
@@ -173,7 +184,7 @@ def process_folder(name, cache):
             omake_imgs = cached.get("omake_imgs", [])
             sponsor = cached.get("sponsor", "")
             print(f"{tag} 元PDFなし（変換済み画像を使用）")
-            cache[name] = {**cached, "info_mtime": info_mtime}
+            cache[name] = {**cached, "info_key": info_key}
             return _entry(meta, name, info, honpen_imgs, omake_imgs, sponsor)
         # 中身が空、または未変換 → 表示しない（静かにスキップ）
         contents = [f for f in os.listdir(folder) if not f.startswith(".") and f != "_pages"]
@@ -185,15 +196,16 @@ def process_folder(name, cache):
     omake_path = os.path.join(folder, omake_file) if omake_file else None
     sponsor = os.path.splitext(honpen_file)[0]
 
+    # 署名は「ファイル名＋サイズ＋内容ハッシュ」で作る（更新時刻は使わない）
     sig = {
-        "honpen": [honpen_file, os.path.getmtime(honpen_path), os.path.getsize(honpen_path)],
-        "omake": ([omake_file, os.path.getmtime(omake_path), os.path.getsize(omake_path)] if omake_path else None),
+        "honpen": file_sig(honpen_path),
+        "omake": file_sig(omake_path) if omake_path else None,
         "settings": [RENDER_DPI, MAX_WIDTH, IMG_QUALITY, PAGE_EXT],
     }
 
     up_to_date = (
         cached and cached.get("sig") == sig and os.path.isdir(pages_dir)
-        and cached.get("info_mtime") == info_mtime
+        and cached.get("info_key") == info_key
         and all(os.path.exists(os.path.join(pages_dir, n)) for n in cached.get("honpen_imgs", []))
     )
 
@@ -212,7 +224,7 @@ def process_folder(name, cache):
         if honpen_imgs:
             make_thumb(os.path.join(pages_dir, honpen_imgs[0]), os.path.join(pages_dir, f"_thumb.{PAGE_EXT}"))
 
-    cache[name] = {"sig": sig, "info_mtime": info_mtime, "sponsor": sponsor,
+    cache[name] = {"sig": sig, "info_key": info_key, "sponsor": sponsor,
                    "honpen_imgs": honpen_imgs, "omake_imgs": omake_imgs}
     return _entry(meta, name, info, honpen_imgs, omake_imgs, sponsor)
 
@@ -259,14 +271,16 @@ def main():
         print("例:  images/1/第1話.pdf  /  images/15-16特別回/特別回.pdf")
         sys.exit(0)
 
-    new_cache = {}
+    # 前回のキャッシュから開始（＝変更のない話は再変換しない）。
+    work_cache = dict(cache)
     episodes = []
     for name in names:
-        entry = process_folder(name, new_cache)
+        entry = process_folder(name, work_cache)
         if entry:
             episodes.append(entry)
-        # 途中で止めても再変換しなくて済むよう、1フォルダごとにキャッシュを保存
-        json.dump(new_cache, open(cache_path, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+        # 途中で止めても進捗が残るよう、1フォルダごとに保存
+        json.dump({k: work_cache[k] for k in names if k in work_cache},
+                  open(cache_path, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
     episodes.sort(key=lambda e: e["sort"])
 
