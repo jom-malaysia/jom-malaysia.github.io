@@ -12,8 +12,7 @@
 
 ```
 1. 新しい回のPDFを images/<話数>/ フォルダに入れる
-2. koushin.bat をダブルクリック  … PDFを画像に変換
-3. hanei.bat をダブルクリック    … サイトに反映（1〜2分で反映）
+2. koushin.bat をダブルクリック  … 変換もサイト反映も全部これ1つ（1〜2分で反映）
 ```
 
 ### 通常の話
@@ -70,7 +69,7 @@ PDFが入っていないフォルダは、サイトに出ません。先に番�
 
 - `koushin.bat` がエラー → コマンドプロンプトで `pip install pymupdf pillow` を一度実行してから再挑戦
 - 画像が全部出ない → リポジトリ直下の `.nojekyll`（空ファイル）を消していないか確認。これは必須
-- Mac の場合 → `koushin.bat` の代わりに `python3 build.py`、`hanei.bat` の代わりに `git add -A && git commit -m 更新 && git push`
+- Mac の場合 → `koushin.bat` の代わりに `python3 build.py && git add -A && git commit -m 更新 && git push`
 
 ---
 
