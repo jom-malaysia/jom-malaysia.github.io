@@ -172,10 +172,9 @@
     margin-top:18px;display:flex;gap:13px;align-items:flex-start;
     background:var(--wash);border:1px solid var(--line);border-radius:12px;padding:15px 16px;max-width:60ch;
   }
-  .author .mono{
-    flex-shrink:0;width:42px;height:42px;border-radius:50%;background:var(--brand-ink);color:#fff;
-    display:flex;align-items:center;justify-content:center;
-    font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:1rem;
+  .author .author-pic{
+    flex-shrink:0;width:56px;height:56px;border-radius:12px;object-fit:cover;object-position:center top;
+    border:1px solid var(--line);
   }
   .author .nm{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:1rem}
   .author .bio{font-size:.86rem;color:var(--ink-soft);margin-top:2px;line-height:1.6}
@@ -384,7 +383,7 @@
     var au = A.author, abox = document.getElementById("about-author");
     if(au){
       abox.innerHTML =
-        '<div class="mono" aria-hidden="true">'+esc((au.name||"作").replace(/^[©©\s]+/,"").trim().slice(0,1) || "作")+'</div>'+
+        '<img class="author-pic" src="assets/author.webp" alt="" loading="lazy">'+
         '<div><div class="nm">'+esc(au.name||"")+'</div>'+
         (au.bio ? '<div class="bio">'+esc(au.bio)+'</div>' : '')+'</div>';
     } else { abox.hidden = true; }

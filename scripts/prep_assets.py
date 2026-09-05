@@ -83,6 +83,15 @@ def do_banner(src_name, out_name, w):
     save(im, out_name, w, q=86)
 
 
+def do_square(src_name, out_name, w, q=84):
+    """中央を正方形に切り出して縮小（作者アイコン等）"""
+    im = Image.open(os.path.join(SRC, src_name)).convert("RGB")
+    s = min(im.size)
+    l = (im.width - s) // 2
+    t = (im.height - s) // 2
+    save(im.crop((l, t, l + s, t + s)), out_name, w, q=q)
+
+
 # --- 登場人物: HP素材/HP用/<名前>.png（正方形カード）をそのまま縮小して使う ---
 HP_CHAR_DIR = os.path.join(SRC, "HP用")
 CHAR_SLUG = {
@@ -107,6 +116,8 @@ if __name__ == "__main__":
     do_banner("スマホ用バナー.png", "banner-sp.webp", 1040)
     print("ロゴ:")
     do_logo("Mtownロゴ.jpeg", "mtown-logo.webp", 560)
+    print("作者:")
+    do_square("しまだなおき.png", "author.webp", 240)
     print("登場人物:")
     for jp, slug in CHAR_SLUG.items():
         do_hpchar(jp, slug)
