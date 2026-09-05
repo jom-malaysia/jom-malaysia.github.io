@@ -190,10 +190,6 @@
   .cast-head{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
   .cast-name{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:.98rem}
   .cast-age{font-size:.72rem;color:var(--ink-soft);font-weight:700}
-  .cast-role{
-    font-size:.64rem;font-weight:700;padding:1px 7px;border-radius:999px;color:#fff;background:var(--accent);
-    align-self:center;
-  }
   .cast-sub{font-size:.73rem;color:var(--brand-ink);font-weight:700;margin-top:2px}
   .cast-desc{font-size:.77rem;color:var(--ink-soft);line-height:1.55;margin-top:4px}
 
@@ -403,7 +399,6 @@
           '<div class="cast-head">'+
             '<span class="cast-name">'+esc(c.name)+'</span>'+
             (c.age?'<span class="cast-age">'+esc(c.age)+'歳</span>':'')+
-            (c.role?'<span class="cast-role">'+esc(c.role)+'</span>':'')+
           '</div>'+
           (c.sub?'<div class="cast-sub">'+esc(c.sub)+'</div>':'')+
           (c.desc?'<div class="cast-desc">'+esc(c.desc)+'</div>':'')+
