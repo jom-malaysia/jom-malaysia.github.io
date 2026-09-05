@@ -226,9 +226,34 @@
   .rd-tabs button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
   .rd-tabs[hidden]{display:none}
 
-  .stage{background:var(--stage);padding:16px 0 80px;margin-top:12px}
+  .stage{background:var(--stage);padding:16px 0 118px;margin-top:12px}
   .stage-in{max-width:900px;margin:0 auto;padding:0 12px;display:flex;flex-direction:column;gap:12px}
-  .stage-in img{width:100%;height:auto;border-radius:4px;background:#fff}
+  .stage-in img{
+    width:calc(min(100%, 860px) * var(--zoom, 1));
+    height:auto;border-radius:4px;background:#fff;cursor:zoom-in;
+  }
+  .stage.zoomed{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .stage.zoomed .stage-in{max-width:none;width:max-content;align-items:flex-start;padding:0 20px}
+  .stage.zoomed .stage-in img{cursor:zoom-out}
+
+  /* まんがの大きさ変更バー（読書画面の下・ナビの上）*/
+  .rd-zoom{
+    max-width:1040px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:7px;
+    padding-bottom:9px;margin-bottom:8px;border-bottom:1px solid var(--line);
+  }
+  .rd-zoom .zlbl{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:.72rem;color:var(--ink-soft);margin-right:3px}
+  .rd-zoom button{
+    width:40px;height:40px;border-radius:50%;border:0;cursor:pointer;line-height:1;
+    background:var(--brand-ink);color:#fff;font-size:1.4rem;font-weight:700;
+    font-family:"Zen Maru Gothic",sans-serif;display:flex;align-items:center;justify-content:center;
+  }
+  .rd-zoom button:hover{background:var(--brand-deep)}
+  .rd-zoom button:disabled{opacity:.3;cursor:default}
+  .rd-zoom .pct{
+    width:54px;height:auto;background:none;color:var(--ink);font-size:.84rem;
+    font-variant-numeric:tabular-nums;border-radius:8px;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;
+  }
+  .rd-zoom .pct:hover{background:var(--wash)}
 
   .endcard{max-width:900px;margin:6px auto 0;padding:20px 16px 4px;display:flex;flex-direction:column;align-items:center;gap:13px;text-align:center}
   .endcard .done{color:var(--stage-fg);opacity:.72;font-size:.9rem}
@@ -332,8 +357,15 @@
     <button id="tab-honpen" aria-pressed="true">本編</button>
     <button id="tab-omake" aria-pressed="false">おまけ</button>
   </div>
-  <div class="stage"><div class="stage-in" id="stage"></div><div class="endcard" id="endcard"></div></div>
+  <div class="stage" id="stage-wrap"><div class="stage-in" id="stage"></div><div class="endcard" id="endcard"></div></div>
+
   <div class="rd-footer">
+    <div class="rd-zoom" id="zoom-ctl">
+      <span class="zlbl">まんがの大きさ</span>
+      <button id="zoom-out" aria-label="小さくする" title="小さくする">－</button>
+      <button class="pct" id="zoom-pct" aria-label="標準の大きさに戻す" title="標準に戻す">100%</button>
+      <button id="zoom-in" aria-label="大きくする" title="大きくする">＋</button>
+    </div>
     <div class="rd-footer-in">
       <button class="rd-nav prev" id="nav-prev">‹ 前の話</button>
       <span class="rd-here" id="nav-here">—</span>
@@ -462,7 +494,7 @@
             (e.omake&&e.omake.length?'<span class="chip">おまけ付き</span>':'')+
           '</div>'+
         '</div>'+
-        '<img class="ep-thumb" loading="lazy" src="'+esc(e.thumb||honpenOf(e)[0]||"")+'" alt="">';
+        '<img class="ep-thumb" loading="lazy" decoding="async" src="'+esc(e.thumb||honpenOf(e)[0]||"")+'" alt="">';
       li.addEventListener("click",function(){ go("#/"+e.id); });
       li.addEventListener("keydown",function(ev){ if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();go("#/"+e.id);} });
       listEl.appendChild(li);
@@ -490,8 +522,26 @@
   var rdTabs=document.getElementById("rd-tabs"), tabH=document.getElementById("tab-honpen"), tabO=document.getElementById("tab-omake");
   var navPrev=document.getElementById("nav-prev"), navNext=document.getElementById("nav-next"), navHere=document.getElementById("nav-here");
   var btnToList=document.getElementById("btn-tolist");
+  var stageWrap=document.getElementById("stage-wrap");
   function idxOf(id){ return ORDER.indexOf(id); }
   function preload(src){ if(src){ var i=new Image(); i.src=src; } }
+
+  /* ---- まんがの大きさ（ズーム）---- */
+  var ZOOMS=[1, 1.3, 1.6, 2, 2.5], zi=0;
+  try{ var _z=parseFloat(localStorage.getItem("mz")); if(_z){ var k=ZOOMS.indexOf(_z); if(k>=0) zi=k; } }catch(e){}
+  function applyZoom(){
+    var z=ZOOMS[zi];
+    stage.style.setProperty("--zoom", z);
+    stageWrap.classList.toggle("zoomed", z>1);
+    document.getElementById("zoom-pct").textContent=Math.round(z*100)+"%";
+    document.getElementById("zoom-out").disabled=(zi<=0);
+    document.getElementById("zoom-in").disabled=(zi>=ZOOMS.length-1);
+    try{ localStorage.setItem("mz", z); }catch(e){}
+  }
+  function setZoom(n){ zi=Math.max(0, Math.min(ZOOMS.length-1, n)); applyZoom(); }
+  document.getElementById("zoom-in").addEventListener("click", function(){ setZoom(zi+1); });
+  document.getElementById("zoom-out").addEventListener("click", function(){ setZoom(zi-1); });
+  document.getElementById("zoom-pct").addEventListener("click", function(){ setZoom(0); });
 
   function renderReader(id, section){
     var e=byId[id];
@@ -511,8 +561,11 @@
     pages.forEach(function(src){
       var img=document.createElement("img");
       img.src=src; img.alt=headLabel(e)+(mode==="omake"?" おまけ":"");
+      img.decoding="async";
+      img.addEventListener("click", function(){ setZoom(zi>=ZOOMS.length-1 ? 0 : zi+1); });
       stage.appendChild(img);
     });
+    applyZoom();
 
     var nextId=ORDER[i+1], prevId=ORDER[i-1];
     endcard.innerHTML="";

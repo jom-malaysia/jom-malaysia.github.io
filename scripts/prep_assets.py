@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-"""HP素材/ の元画像(白背景)を、透過PNGに加工して assets/ へ書き出す。
-   - ロゴ: 白背景を透過、内容にトリミング
-   - キャラ: 白背景を透過（ふちの線画で止まるので内側の白は残る）、
-             フルボディ像とちびキャラを別々に切り出し
+"""HP素材/ の元画像を、サイト用の軽量WebPに加工して assets/ へ書き出す。
+   - バナー(PC/スマホ)・Mtownロゴ・作者アイコン・登場人物7名
+   バナーやキャラ画像を差し替えたら、これを実行するだけ。
    使い方: python scripts/prep_assets.py
 """
 import os
@@ -80,7 +79,7 @@ def do_logo(src_name, out_name, w):
 def do_banner(src_name, out_name, w):
     """バナー画像はそのまま（背景透過なし）縮小してWebP化"""
     im = Image.open(os.path.join(SRC, src_name)).convert("RGB")
-    save(im, out_name, w, q=86)
+    save(im, out_name, w, q=82)
 
 
 def do_square(src_name, out_name, w, q=84):
@@ -105,19 +104,19 @@ def do_hpchar(jp, slug):
         p = os.path.join(HP_CHAR_DIR, jp + ext)
         if os.path.exists(p):
             im = Image.open(p).convert("RGB")
-            save(im, f"char-{slug}.webp", 640, q=84)
+            save(im, f"char-{slug}.webp", 560, q=80)
             return
     print(f"  （見つからず）HP用/{jp}.png")
 
 
 if __name__ == "__main__":
     print("バナー:")
-    do_banner("PC用バナー.png", "banner-pc.webp", 1720)
-    do_banner("スマホ用バナー.png", "banner-sp.webp", 1040)
+    do_banner("PC用バナー.png", "banner-pc.webp", 1500)
+    do_banner("スマホ用バナー.png", "banner-sp.webp", 960)
     print("ロゴ:")
     do_logo("Mtownロゴ.jpeg", "mtown-logo.webp", 560)
     print("作者:")
-    do_square("しまだなおき.png", "author.webp", 240)
+    do_square("しまだなおき.png", "author.webp", 220, q=82)
     print("登場人物:")
     for jp, slug in CHAR_SLUG.items():
         do_hpchar(jp, slug)

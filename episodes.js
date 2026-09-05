@@ -11,12 +11,12 @@ window.EPISODES = [
     "sort": 1.0,
     "date": "2026-09",
     "note": "",
-    "thumb": "images/1/_pages/_thumb.jpg",
+    "thumb": "images/1/_pages/_thumb.webp",
     "honpen": [
-      "images/1/_pages/honpen_01.jpg"
+      "images/1/_pages/honpen_01.webp"
     ],
     "omake": [
-      "images/1/_pages/omake_01.jpg"
+      "images/1/_pages/omake_01.webp"
     ],
     "no": 1,
     "title": "第1話"
@@ -27,12 +27,12 @@ window.EPISODES = [
     "sort": 2.0,
     "date": "",
     "note": "",
-    "thumb": "images/2/_pages/_thumb.jpg",
+    "thumb": "images/2/_pages/_thumb.webp",
     "honpen": [
-      "images/2/_pages/honpen_01.jpg"
+      "images/2/_pages/honpen_01.webp"
     ],
     "omake": [
-      "images/2/_pages/omake_01.jpg"
+      "images/2/_pages/omake_01.webp"
     ],
     "no": 2,
     "title": "第2話"
@@ -43,12 +43,12 @@ window.EPISODES = [
     "sort": 3.0,
     "date": "",
     "note": "",
-    "thumb": "images/3/_pages/_thumb.jpg",
+    "thumb": "images/3/_pages/_thumb.webp",
     "honpen": [
-      "images/3/_pages/honpen_01.jpg"
+      "images/3/_pages/honpen_01.webp"
     ],
     "omake": [
-      "images/3/_pages/omake_01.jpg"
+      "images/3/_pages/omake_01.webp"
     ],
     "no": 3,
     "title": "第3話"
@@ -59,12 +59,12 @@ window.EPISODES = [
     "sort": 4.0,
     "date": "",
     "note": "",
-    "thumb": "images/4/_pages/_thumb.jpg",
+    "thumb": "images/4/_pages/_thumb.webp",
     "honpen": [
-      "images/4/_pages/honpen_01.jpg"
+      "images/4/_pages/honpen_01.webp"
     ],
     "omake": [
-      "images/4/_pages/omake_01.jpg"
+      "images/4/_pages/omake_01.webp"
     ],
     "no": 4,
     "title": "第4話"
@@ -75,12 +75,12 @@ window.EPISODES = [
     "sort": 5.0,
     "date": "",
     "note": "",
-    "thumb": "images/5/_pages/_thumb.jpg",
+    "thumb": "images/5/_pages/_thumb.webp",
     "honpen": [
-      "images/5/_pages/honpen_01.jpg"
+      "images/5/_pages/honpen_01.webp"
     ],
     "omake": [
-      "images/5/_pages/omake_01.jpg"
+      "images/5/_pages/omake_01.webp"
     ],
     "no": 5,
     "title": "第5話"
@@ -91,12 +91,12 @@ window.EPISODES = [
     "sort": 6.0,
     "date": "",
     "note": "",
-    "thumb": "images/6/_pages/_thumb.jpg",
+    "thumb": "images/6/_pages/_thumb.webp",
     "honpen": [
-      "images/6/_pages/honpen_01.jpg"
+      "images/6/_pages/honpen_01.webp"
     ],
     "omake": [
-      "images/6/_pages/omake_01.jpg"
+      "images/6/_pages/omake_01.webp"
     ],
     "no": 6,
     "title": "第6話"
@@ -107,9 +107,9 @@ window.EPISODES = [
     "sort": 7.0,
     "date": "",
     "note": "",
-    "thumb": "images/7/_pages/_thumb.jpg",
+    "thumb": "images/7/_pages/_thumb.webp",
     "honpen": [
-      "images/7/_pages/honpen_01.jpg"
+      "images/7/_pages/honpen_01.webp"
     ],
     "omake": [],
     "no": 7,
@@ -121,9 +121,9 @@ window.EPISODES = [
     "sort": 8.0,
     "date": "",
     "note": "",
-    "thumb": "images/8/_pages/_thumb.jpg",
+    "thumb": "images/8/_pages/_thumb.webp",
     "honpen": [
-      "images/8/_pages/honpen_01.jpg"
+      "images/8/_pages/honpen_01.webp"
     ],
     "omake": [],
     "no": 8,
@@ -135,9 +135,9 @@ window.EPISODES = [
     "sort": 9.0,
     "date": "",
     "note": "",
-    "thumb": "images/9/_pages/_thumb.jpg",
+    "thumb": "images/9/_pages/_thumb.webp",
     "honpen": [
-      "images/9/_pages/honpen_01.jpg"
+      "images/9/_pages/honpen_01.webp"
     ],
     "omake": [],
     "no": 9,
@@ -149,9 +149,9 @@ window.EPISODES = [
     "sort": 10.0,
     "date": "",
     "note": "",
-    "thumb": "images/10/_pages/_thumb.jpg",
+    "thumb": "images/10/_pages/_thumb.webp",
     "honpen": [
-      "images/10/_pages/honpen_01.jpg"
+      "images/10/_pages/honpen_01.webp"
     ],
     "omake": [],
     "no": 10,
@@ -163,9 +163,9 @@ window.EPISODES = [
     "sort": 11.0,
     "date": "",
     "note": "",
-    "thumb": "images/11/_pages/_thumb.jpg",
+    "thumb": "images/11/_pages/_thumb.webp",
     "honpen": [
-      "images/11/_pages/honpen_01.jpg"
+      "images/11/_pages/honpen_01.webp"
     ],
     "omake": [],
     "no": 11,
@@ -177,9 +177,9 @@ window.EPISODES = [
     "sort": 12.0,
     "date": "",
     "note": "",
-    "thumb": "images/12/_pages/_thumb.jpg",
+    "thumb": "images/12/_pages/_thumb.webp",
     "honpen": [
-      "images/12/_pages/honpen_01.jpg"
+      "images/12/_pages/honpen_01.webp"
     ],
     "omake": [],
     "no": 12,
@@ -191,9 +191,9 @@ window.EPISODES = [
     "sort": 13.0,
     "date": "",
     "note": "",
-    "thumb": "images/13/_pages/_thumb.jpg",
+    "thumb": "images/13/_pages/_thumb.webp",
     "honpen": [
-      "images/13/_pages/honpen_01.jpg"
+      "images/13/_pages/honpen_01.webp"
     ],
     "omake": [],
     "no": 13,
@@ -205,9 +205,9 @@ window.EPISODES = [
     "sort": 14.0,
     "date": "",
     "note": "",
-    "thumb": "images/14/_pages/_thumb.jpg",
+    "thumb": "images/14/_pages/_thumb.webp",
     "honpen": [
-      "images/14/_pages/honpen_01.jpg"
+      "images/14/_pages/honpen_01.webp"
     ],
     "omake": [],
     "no": 14,
@@ -219,12 +219,12 @@ window.EPISODES = [
     "sort": 15.0,
     "date": "",
     "note": "",
-    "thumb": "images/15/_pages/_thumb.jpg",
+    "thumb": "images/15/_pages/_thumb.webp",
     "honpen": [
-      "images/15/_pages/honpen_01.jpg"
+      "images/15/_pages/honpen_01.webp"
     ],
     "omake": [
-      "images/15/_pages/omake_01.jpg"
+      "images/15/_pages/omake_01.webp"
     ],
     "no": 15,
     "title": "第15話"
@@ -235,9 +235,9 @@ window.EPISODES = [
     "sort": 16.0,
     "date": "",
     "note": "",
-    "thumb": "images/16/_pages/_thumb.jpg",
+    "thumb": "images/16/_pages/_thumb.webp",
     "honpen": [
-      "images/16/_pages/honpen_01.jpg"
+      "images/16/_pages/honpen_01.webp"
     ],
     "omake": [],
     "no": 16,
@@ -249,9 +249,9 @@ window.EPISODES = [
     "sort": 16.5,
     "date": "",
     "note": "",
-    "thumb": "images/16-17特別回/_pages/_thumb.jpg",
+    "thumb": "images/16-17特別回/_pages/_thumb.webp",
     "honpen": [
-      "images/16-17特別回/_pages/honpen_01.jpg"
+      "images/16-17特別回/_pages/honpen_01.webp"
     ],
     "omake": [],
     "label": "特別回",
@@ -268,9 +268,9 @@ window.EPISODES = [
     "sort": 17.0,
     "date": "",
     "note": "",
-    "thumb": "images/17/_pages/_thumb.jpg",
+    "thumb": "images/17/_pages/_thumb.webp",
     "honpen": [
-      "images/17/_pages/honpen_01.jpg"
+      "images/17/_pages/honpen_01.webp"
     ],
     "omake": [],
     "no": 17,
@@ -282,9 +282,9 @@ window.EPISODES = [
     "sort": 18.0,
     "date": "",
     "note": "",
-    "thumb": "images/18/_pages/_thumb.jpg",
+    "thumb": "images/18/_pages/_thumb.webp",
     "honpen": [
-      "images/18/_pages/honpen_01.jpg"
+      "images/18/_pages/honpen_01.webp"
     ],
     "omake": [],
     "no": 18,
@@ -296,9 +296,9 @@ window.EPISODES = [
     "sort": 19.0,
     "date": "",
     "note": "",
-    "thumb": "images/19/_pages/_thumb.jpg",
+    "thumb": "images/19/_pages/_thumb.webp",
     "honpen": [
-      "images/19/_pages/honpen_01.jpg"
+      "images/19/_pages/honpen_01.webp"
     ],
     "omake": [],
     "no": 19,
@@ -310,9 +310,9 @@ window.EPISODES = [
     "sort": 21.0,
     "date": "",
     "note": "",
-    "thumb": "images/21/_pages/_thumb.jpg",
+    "thumb": "images/21/_pages/_thumb.webp",
     "honpen": [
-      "images/21/_pages/honpen_01.jpg"
+      "images/21/_pages/honpen_01.webp"
     ],
     "omake": [],
     "no": 21,
@@ -324,9 +324,9 @@ window.EPISODES = [
     "sort": 22.0,
     "date": "",
     "note": "",
-    "thumb": "images/22/_pages/_thumb.jpg",
+    "thumb": "images/22/_pages/_thumb.webp",
     "honpen": [
-      "images/22/_pages/honpen_01.jpg"
+      "images/22/_pages/honpen_01.webp"
     ],
     "omake": [],
     "no": 22,

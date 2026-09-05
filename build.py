@@ -3,9 +3,9 @@
 Mtown 連載マンガ アーカイブ  ―  ビルドスクリプト
 
 images/ 内のフォルダを全部スキャンして、
-  ・本編PDF   → 画像に変換（images/<フォルダ>/_pages/honpen_XX.jpg）
-  ・おまけPDF → 画像に変換（images/<フォルダ>/_pages/omake_XX.jpg）
-  ・サムネイル → _pages/_thumb.jpg
+  ・本編PDF   → 画像に変換（images/<フォルダ>/_pages/honpen_XX.webp）
+  ・おまけPDF → 画像に変換（images/<フォルダ>/_pages/omake_XX.webp）
+  ・サムネイル → _pages/_thumb.webp
   ・一覧データ episodes.js を自動生成
 します。
 
@@ -43,10 +43,11 @@ IMAGES_DIR = os.path.join(ROOT, "images")
 
 # ---- 画質設定（必要なら変更）---------------------------------
 RENDER_DPI = 200
-MAX_WIDTH = 1800
-JPEG_QUALITY = 82
-THUMB_WIDTH = 600
-THUMB_QUALITY = 78
+MAX_WIDTH = 1600       # 生成画像の最大幅(px)。スマホ〜PCで十分な解像度
+IMG_QUALITY = 80       # WebP 品質（JPEGより軽い）
+THUMB_WIDTH = 480
+THUMB_QUALITY = 72
+PAGE_EXT = "webp"      # 生成する画像フォーマット（軽量化のため WebP）
 # ------------------------------------------------------------
 
 OMAKE_RE = re.compile(r"(おまけ|オマケ|omake|bonus|extra|付録)", re.I)
@@ -129,8 +130,8 @@ def render_pdf(pdf_path, out_dir, prefix):
         if img.width > MAX_WIDTH:
             h = round(img.height * MAX_WIDTH / img.width)
             img = img.resize((MAX_WIDTH, h), Image.LANCZOS)
-        name = f"{prefix}_{i:02d}.jpg"
-        img.save(os.path.join(out_dir, name), "JPEG", quality=JPEG_QUALITY, optimize=True)
+        name = f"{prefix}_{i:02d}.{PAGE_EXT}"
+        img.save(os.path.join(out_dir, name), PAGE_EXT.upper(), quality=IMG_QUALITY, method=6)
         out_paths.append(name)
     doc.close()
     return out_paths
@@ -141,7 +142,7 @@ def make_thumb(src_img_path, dst_path):
     if img.width > THUMB_WIDTH:
         h = round(img.height * THUMB_WIDTH / img.width)
         img = img.resize((THUMB_WIDTH, h), Image.LANCZOS)
-    img.save(dst_path, "JPEG", quality=THUMB_QUALITY, optimize=True)
+    img.save(dst_path, PAGE_EXT.upper(), quality=THUMB_QUALITY, method=6)
 
 
 def process_folder(name, cache):
@@ -154,30 +155,42 @@ def process_folder(name, cache):
         return None
     tag = f"[第{meta['no']}話]" if meta["kind"] == "episode" else f"[{meta['label']}({meta['between'][0]}-{meta['between'][1]})]"
 
-    # 中身が空のフォルダは「表示しない」= 何も出さず静かにスキップ
-    contents = [f for f in os.listdir(folder) if not f.startswith(".") and f != "_pages"]
-    if not contents:
-        return None
+    info = parse_info(folder)
+    pages_dir = os.path.join(folder, "_pages")
+    info_p = os.path.join(folder, "info.txt")
+    info_mtime = os.path.getmtime(info_p) if os.path.isfile(info_p) else 0
+    cached = cache.get(name)
 
     honpen_file, omake_file = classify_pdfs(folder)
+
+    # --- PDF が無いフォルダの扱い -----------------------------------
     if not honpen_file:
-        print(f"{tag} PDFが見つかりません → スキップ（表示しません）")
+        has_pages = os.path.isdir(pages_dir) and any(
+            f.startswith("honpen_") for f in os.listdir(pages_dir))
+        if cached and has_pages:
+            # 変換済みの画像が残っている → 元PDFを消してもそのまま表示を維持
+            honpen_imgs = cached.get("honpen_imgs", [])
+            omake_imgs = cached.get("omake_imgs", [])
+            sponsor = cached.get("sponsor", "")
+            print(f"{tag} 元PDFなし（変換済み画像を使用）")
+            cache[name] = {**cached, "info_mtime": info_mtime}
+            return _entry(meta, name, info, honpen_imgs, omake_imgs, sponsor)
+        # 中身が空、または未変換 → 表示しない（静かにスキップ）
+        contents = [f for f in os.listdir(folder) if not f.startswith(".") and f != "_pages"]
+        if contents:
+            print(f"{tag} PDFが見つかりません → スキップ（表示しません）")
         return None
 
     honpen_path = os.path.join(folder, honpen_file)
     omake_path = os.path.join(folder, omake_file) if omake_file else None
-    info = parse_info(folder)
-    pages_dir = os.path.join(folder, "_pages")
+    sponsor = os.path.splitext(honpen_file)[0]
 
     sig = {
         "honpen": [honpen_file, os.path.getmtime(honpen_path), os.path.getsize(honpen_path)],
         "omake": ([omake_file, os.path.getmtime(omake_path), os.path.getsize(omake_path)] if omake_path else None),
-        "settings": [RENDER_DPI, MAX_WIDTH, JPEG_QUALITY],
+        "settings": [RENDER_DPI, MAX_WIDTH, IMG_QUALITY, PAGE_EXT],
     }
-    info_p = os.path.join(folder, "info.txt")
-    info_mtime = os.path.getmtime(info_p) if os.path.isfile(info_p) else 0
 
-    cached = cache.get(name)
     up_to_date = (
         cached and cached.get("sig") == sig and os.path.isdir(pages_dir)
         and cached.get("info_mtime") == info_mtime
@@ -191,17 +204,20 @@ def process_folder(name, cache):
     else:
         os.makedirs(pages_dir, exist_ok=True)
         for old in os.listdir(pages_dir):
-            if old.lower().endswith((".jpg", ".png")):
+            if old.lower().endswith((".jpg", ".jpeg", ".png", ".webp")):
                 os.remove(os.path.join(pages_dir, old))
         print(f"{tag} 変換中: {honpen_file}" + (f" + {omake_file}" if omake_file else ""))
         honpen_imgs = render_pdf(honpen_path, pages_dir, "honpen")
         omake_imgs = render_pdf(omake_path, pages_dir, "omake") if omake_path else []
         if honpen_imgs:
-            make_thumb(os.path.join(pages_dir, honpen_imgs[0]), os.path.join(pages_dir, "_thumb.jpg"))
+            make_thumb(os.path.join(pages_dir, honpen_imgs[0]), os.path.join(pages_dir, f"_thumb.{PAGE_EXT}"))
 
-    cache[name] = {"sig": sig, "info_mtime": info_mtime,
+    cache[name] = {"sig": sig, "info_mtime": info_mtime, "sponsor": sponsor,
                    "honpen_imgs": honpen_imgs, "omake_imgs": omake_imgs}
+    return _entry(meta, name, info, honpen_imgs, omake_imgs, sponsor)
 
+
+def _entry(meta, name, info, honpen_imgs, omake_imgs, sponsor):
     rel = f"images/{name}/_pages"
     entry = {
         "kind": meta["kind"],
@@ -209,7 +225,7 @@ def process_folder(name, cache):
         "sort": meta["sort"],
         "date": info["date"],
         "note": info["note"],
-        "thumb": f"{rel}/_thumb.jpg",
+        "thumb": f"{rel}/_thumb.{PAGE_EXT}",
         "honpen": [f"{rel}/{n}" for n in honpen_imgs],
         "omake": [f"{rel}/{n}" for n in omake_imgs],
     }
@@ -219,8 +235,7 @@ def process_folder(name, cache):
     else:
         entry["label"] = meta["label"]
         entry["between"] = meta["between"]
-        # 一覧の副見出しは PDF のファイル名（拡張子なし）＝広告主名などを表示する
-        entry["sponsor"] = os.path.splitext(honpen_file)[0]
+        entry["sponsor"] = sponsor        # 一覧の副見出し＝PDFファイル名（広告主名など）
         entry["title"] = info["title"] or meta["label"]
     return entry
 
@@ -275,7 +290,7 @@ def main():
     print("-" * 48)
     print(f"完了: 本編 {n_ep} 話 ／ 特別回 {n_sp} ／ おまけ付き {n_omake}")
     print("episodes.js を更新しました。")
-    print("次: このフォルダを Cloudflare Pages に再アップロードしてください。")
+    print("次: hanei.bat をダブルクリックするとサイトに反映されます。")
 
 
 if __name__ == "__main__":
