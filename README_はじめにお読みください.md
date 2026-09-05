@@ -97,24 +97,29 @@ python scripts/prep_assets.py
 
 ---
 
-## ③ 無料で公開する（どちらか1つ）
+## ③ 公開について（設定済み）
 
-### 方法A：Cloudflare Pages（おすすめ・Gitの知識不要）
+このプロジェクトは **GitHubリポジトリ `mtown-jom-malaysia` ＋ Cloudflare Pages** で公開されています。
 
-1. <https://dash.cloudflare.com/sign-up> で無料アカウント作成
-2. **Workers & Pages → Create → Pages → Upload assets**
-3. この `Mtownマンガアーカイブ` フォルダごとドラッグ＆ドロップ
-4. プロジェクト名（例 `jom-malaysia`）を入れて **Deploy**
-5. `https://jom-malaysia.pages.dev` のようなURLが発行される → 完成
+- 本番URL: **https://jom-malaysia.pages.dev/** （Cloudflareのプロジェクト名で決まる。個人名なし）
+- GitHubリポジトリはコード置き場。`hanei.bat`（git push）を実行すると Cloudflare が自動で再デプロイする。
 
-- 容量・アクセス数の実質制限なし、完全無料、広告なし
-- 独自ドメインも後から無料でひも付け可（ドメイン代のみ年1,000〜1,800円）
+### 更新の流れ（毎週）
 
-### 方法B：GitHub Pages
+```
+1. 新しい回のPDFを images/<話数>/ に入れる（特別回は images/<前>-<次>特別回/）
+2. koushin.bat をダブルクリック（PDF → 画像に変換）
+3. hanei.bat をダブルクリック（git push → Cloudflare が1〜2分で反映）
+```
 
-1. GitHub で Public リポジトリを作り、一式をアップロード（`index.html` がルート）
-2. **Settings → Pages** → Branch を `main` / `/root` → Save
-3. `https://ユーザー名.github.io/リポジトリ名/` で公開
+### Cloudflare Pages の初期設定（済んでいれば不要）
+
+1. <https://dash.cloudflare.com/sign-up> で無料アカウント作成（氏名は不要）
+2. **Workers & Pages → Create → Pages → Connect to Git** → GitHubを認可
+3. リポジトリ `mtown-jom-malaysia` を選択
+4. Project name = `jom-malaysia`（＝URLになる）／ Production branch = `main`
+5. Framework preset = **None** ／ Build command = **空欄** ／ Build output directory = `/`
+6. **Save and Deploy** → `https://jom-malaysia.pages.dev/` で公開
 
 ---
 
