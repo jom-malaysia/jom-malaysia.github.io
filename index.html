@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jom! マレーシア！ アーカイブ</title>
+<meta name="description" content="マレーシア週刊情報誌 Mtown の連載マンガ「Jom! マレーシア！」を第1話から続けて読めるアーカイブ。">
+<meta property="og:title" content="Jom! マレーシア！ 連載マンガ アーカイブ">
+<meta property="og:description" content="週刊情報誌 Mtown の連載マンガを第1話から続けて読めます">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap">
+<style>
+  /* ============ Mtown 由来のパレット（白地・ティール・オレンジ）============ */
+  :root{
+    --paper:#ffffff;
+    --ink:#232a2e;
+    --ink-soft:#5c6b71;
+    --line:#e5eef0;
+    --wash:#eff9fb;
+    --brand:#1fa6c2;
+    --brand-ink:#0d6a7b;
+    --brand-deep:#0a5361;
+    --accent:#ee7d20;
+    --accent-ink:#b1590d;
+    --hero-a:#e4f5fa;
+    --hero-b:#ffffff;
+    --stage:#16181a;
+    --stage-fg:#f2f0eb;
+    --shadow:0 1px 2px rgba(15,45,52,.05), 0 12px 34px rgba(15,45,52,.08);
+    --radius:14px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --paper:#11151a; --ink:#eef2f3; --ink-soft:#9fb2b7; --line:#243038;
+      --wash:#102a30; --brand:#34bcd7; --brand-ink:#7fdae8; --brand-deep:#a7e6f0;
+      --accent:#ff9b46; --accent-ink:#ffbd82; --hero-a:#0e2a31; --hero-b:#11151a;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 36px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#11151a; --ink:#eef2f3; --ink-soft:#9fb2b7; --line:#243038;
+    --wash:#102a30; --brand:#34bcd7; --brand-ink:#7fdae8; --brand-deep:#a7e6f0;
+    --accent:#ff9b46; --accent-ink:#ffbd82; --hero-a:#0e2a31; --hero-b:#11151a;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 36px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  [hidden]{display:none!important}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:"Noto Sans JP",system-ui,-apple-system,"Hiragino Kaku Gothic ProN","Meiryo",sans-serif;
+    line-height:1.75; font-feature-settings:"palt" 1; -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block}
+  a{color:var(--brand-ink);text-underline-offset:2px}
+  ::selection{background:var(--wash)}
+  .disp{font-family:"Zen Maru Gothic","Noto Sans JP",sans-serif}
+  .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+
+  /* ============ app bar ============ */
+  .appbar{position:sticky;top:0;z-index:40;background:var(--paper);border-bottom:1px solid var(--line)}
+  .appbar-in{
+    max-width:1040px;margin:0 auto;display:flex;align-items:center;gap:11px;
+    padding:calc(env(safe-area-inset-top) + 11px) 18px 11px;
+  }
+  .appbar .mt-logo{height:19px;width:auto;flex-shrink:0}
+  .appbar .divider{width:1px;height:18px;background:var(--line)}
+  .wordmark{
+    font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:.98rem;
+    color:var(--ink);letter-spacing:.01em;text-decoration:none;line-height:1;
+  }
+  .appbar .spacer{flex:1}
+  .backlink{
+    display:inline-flex;align-items:center;gap:5px;background:none;border:0;cursor:pointer;
+    color:var(--brand-ink);font:inherit;font-weight:700;font-size:.9rem;padding:6px 2px;
+  }
+
+  /* ============ hero (バナー) ============ */
+  .hero{background:linear-gradient(165deg,var(--hero-a),var(--hero-b) 78%);border-bottom:1px solid var(--line)}
+  .hero-in{max-width:1040px;margin:0 auto;padding:22px 18px 24px}
+  .hero picture,.hero img.banner{display:block}
+  .hero img.banner{
+    width:100%;height:auto;border-radius:var(--radius);
+    box-shadow:0 6px 26px rgba(15,55,64,.16);
+  }
+  .hero-cta{display:flex;flex-wrap:wrap;gap:11px;justify-content:center;margin-top:20px}
+  .btn{
+    font-family:"Zen Maru Gothic",sans-serif;font-weight:700;cursor:pointer;border-radius:999px;font-size:.98rem;
+    padding:13px 28px;display:inline-flex;align-items:center;gap:8px;
+    border:1.6px solid var(--brand-ink);transition:transform .1s, background .15s;
+  }
+  .btn:active{transform:translateY(1px)}
+  .btn-fill{background:var(--brand-ink);color:#fff}
+  .btn-fill:hover{background:var(--brand-deep)}
+  .btn-line{background:var(--paper);color:var(--brand-ink)}
+  .btn-line:hover{background:var(--wash)}
+
+  /* ============ list ============ */
+  .wrap{max-width:1040px;margin:0 auto;padding:0 18px}
+  .listbar{
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:24px 0 8px;
+    position:sticky;top:calc(env(safe-area-inset-top) + 44px);background:var(--paper);z-index:20;
+  }
+  .search{
+    flex:1;min-width:170px;display:flex;align-items:center;gap:8px;background:var(--paper);
+    border:1px solid var(--line);border-radius:999px;padding:9px 15px;
+  }
+  .search input{border:0;outline:0;background:none;font:inherit;color:var(--ink);width:100%;font-size:.92rem}
+  .search svg{flex-shrink:0;opacity:.5}
+  .seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+  .seg button{border:0;background:var(--paper);color:var(--ink-soft);padding:9px 15px;font:inherit;font-size:.85rem;font-weight:700;cursor:pointer}
+  .seg button[aria-pressed="true"]{background:var(--brand-ink);color:#fff}
+  .total{margin-left:auto;color:var(--ink-soft);font-size:.82rem;font-weight:700}
+  .total b{font-family:"Zen Maru Gothic",sans-serif;color:var(--ink);font-size:1.06rem;margin-right:1px}
+
+  .eplist{list-style:none;padding-bottom:8px}
+  .ep{
+    display:grid;grid-template-columns:auto 1fr auto;gap:15px;align-items:center;
+    padding:15px 10px;border-bottom:1px solid var(--line);cursor:pointer;border-radius:10px;transition:background .12s;
+  }
+  .ep:hover{background:var(--wash)}
+  .ep:focus-visible{outline:2.5px solid var(--brand);outline-offset:-2px}
+  .ep-no{font-family:"Zen Maru Gothic",sans-serif;text-align:center;color:var(--brand-ink);min-width:54px;line-height:1.05}
+  .ep-no i{display:block;font-style:normal;font-size:.64rem;color:var(--ink-soft);font-weight:500;letter-spacing:.1em}
+  .ep-no b{font-size:1.55rem;font-variant-numeric:tabular-nums}
+  .ep-body{min-width:0}
+  .ep-title{font-weight:700;font-size:1rem;line-height:1.5;overflow-wrap:anywhere}
+  .ep-sub{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:2px}
+  .ep-date{color:var(--ink-soft);font-size:.79rem;font-variant-numeric:tabular-nums}
+  .chip{
+    font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:999px;letter-spacing:.02em;
+    color:var(--accent-ink);border:1px solid color-mix(in srgb,var(--accent) 50%, transparent);
+    background:color-mix(in srgb,var(--accent) 12%, transparent);
+  }
+  .ep-thumb{width:98px;aspect-ratio:4/3;object-fit:cover;object-position:top;border-radius:8px;border:1px solid var(--line);background:var(--wash)}
+  @media (max-width:520px){
+    .ep{grid-template-columns:auto 1fr;gap:12px}
+    .ep-thumb{grid-column:2;width:100%;aspect-ratio:16/6;margin-top:5px}
+  }
+  .empty{color:var(--ink-soft);text-align:center;padding:52px 0}
+
+  /* 特別回（広告など）の行 */
+  .ep--sp{background:color-mix(in srgb,var(--accent) 6%, var(--paper))}
+  .ep--sp:hover{background:color-mix(in srgb,var(--accent) 12%, var(--paper))}
+  .ep-badge-sp{
+    min-width:54px;text-align:center;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;
+    font-size:.72rem;line-height:1.3;color:#fff;background:var(--accent);
+    border-radius:8px;padding:6px 4px;letter-spacing:.02em;
+  }
+  .ep-between{color:var(--accent-ink);font-size:.76rem;font-weight:700}
+
+  /* ============ タブ（この漫画について / 登場人物 / おといあわせ）============ */
+  .tabsec{background:var(--paper);border-bottom:1px solid var(--line)}
+  .tabsec-in{max-width:1040px;margin:0 auto;padding:0 18px 30px}
+  .tablist{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--line)}
+  .tablist::-webkit-scrollbar{display:none}
+  .tablist button{
+    flex:0 0 auto;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:.92rem;
+    background:none;border:0;cursor:pointer;color:var(--ink-soft);
+    padding:15px 15px 12px;border-bottom:3px solid transparent;margin-bottom:-1px;
+  }
+  .tablist button[aria-selected="true"]{color:var(--brand-ink);border-bottom-color:var(--brand)}
+  .tabpanel{padding-top:22px}
+  .tabpanel[hidden]{display:none!important}
+
+  .panel-lead{font-size:1rem;line-height:1.95;max-width:60ch;overflow-wrap:anywhere}
+  .author{
+    margin-top:18px;display:flex;gap:13px;align-items:flex-start;
+    background:var(--wash);border:1px solid var(--line);border-radius:12px;padding:15px 16px;max-width:60ch;
+  }
+  .author .mono{
+    flex-shrink:0;width:42px;height:42px;border-radius:50%;background:var(--brand-ink);color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:1rem;
+  }
+  .author .nm{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:1rem}
+  .author .bio{font-size:.86rem;color:var(--ink-soft);margin-top:2px;line-height:1.6}
+
+  .cast-grid{display:grid;gap:11px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+  .cast-item{
+    display:grid;grid-template-columns:74px 1fr;gap:12px;align-items:start;
+    background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:11px 12px;
+  }
+  .cast-pic{width:74px;height:74px;border-radius:10px;overflow:hidden;background:var(--wash);border:1px solid var(--line)}
+  .cast-pic img{width:100%;height:100%;object-fit:cover;object-position:top center}
+  .cast-head{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
+  .cast-name{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:.98rem}
+  .cast-age{font-size:.72rem;color:var(--ink-soft);font-weight:700}
+  .cast-role{
+    font-size:.64rem;font-weight:700;padding:1px 7px;border-radius:999px;color:#fff;background:var(--accent);
+    align-self:center;
+  }
+  .cast-sub{font-size:.73rem;color:var(--brand-ink);font-weight:700;margin-top:2px}
+  .cast-desc{font-size:.77rem;color:var(--ink-soft);line-height:1.55;margin-top:4px}
+
+  .contact-card{
+    background:var(--wash);border:1px solid var(--line);border-radius:12px;
+    padding:22px 22px;max-width:440px;
+  }
+  .contact-card h3{
+    font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:1.05rem;color:var(--ink);
+    display:flex;align-items:center;gap:9px;
+  }
+  .contact-card h3::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent)}
+  .contact-card dl{margin-top:14px;display:grid;gap:11px}
+  .contact-card dl>div{display:grid;grid-template-columns:74px 1fr;gap:12px;align-items:baseline;font-size:.94rem}
+  .contact-card dt{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;color:var(--ink-soft);font-size:.82rem;letter-spacing:.04em}
+  .contact-card dd a{font-weight:700}
+  .contact-card .tel{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+  @media (max-width:520px){ .contact-card dl>div{grid-template-columns:1fr;gap:1px} }
+
+  /* ============ footer ============ */
+  footer.site{padding:26px 18px calc(env(safe-area-inset-bottom) + 30px);text-align:center;border-top:1px solid var(--line)}
+  footer.site .mt-logo{height:24px;width:auto;margin:0 auto 10px;opacity:.9}
+  footer.site p{color:var(--ink-soft);font-size:.8rem;line-height:1.7;max-width:44ch;margin:0 auto}
+
+  /* ============ reader ============ */
+  #view-reader{display:none}
+  body.reading #view-list{display:none}
+  body.reading #view-reader{display:block}
+
+  .rd-tabs{max-width:1040px;margin:0 auto;display:flex;gap:8px;justify-content:center;padding:12px 18px 0}
+  .rd-tabs button{
+    font:inherit;font-weight:700;font-size:.85rem;cursor:pointer;padding:7px 20px;border-radius:999px;
+    border:1px solid var(--line);background:var(--paper);color:var(--ink-soft);
+  }
+  .rd-tabs button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+  .rd-tabs[hidden]{display:none}
+
+  .stage{background:var(--stage);padding:16px 0 80px;margin-top:12px}
+  .stage-in{max-width:900px;margin:0 auto;padding:0 12px;display:flex;flex-direction:column;gap:12px}
+  .stage-in img{width:100%;height:auto;border-radius:4px;background:#fff}
+
+  .endcard{max-width:900px;margin:6px auto 0;padding:20px 16px 4px;display:flex;flex-direction:column;align-items:center;gap:13px;text-align:center}
+  .endcard .done{color:var(--stage-fg);opacity:.72;font-size:.9rem}
+  .next-big{
+    width:100%;max-width:460px;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:1.05rem;
+    cursor:pointer;background:var(--brand-ink);color:#fff;border:0;border-radius:var(--radius);
+    padding:17px 20px;display:flex;flex-direction:column;align-items:center;gap:2px;
+  }
+  .next-big:hover{background:var(--brand-deep)}
+  .next-big span{font-size:.72rem;opacity:.85;font-weight:500;font-family:"Noto Sans JP",sans-serif}
+  .to-list{background:none;border:0;color:var(--stage-fg);opacity:.72;font:inherit;font-size:.86rem;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+
+  .rd-footer{position:sticky;bottom:0;z-index:20;background:var(--paper);border-top:1px solid var(--line);padding:9px 18px calc(env(safe-area-inset-bottom) + 9px)}
+  .rd-footer-in{max-width:1040px;margin:0 auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px}
+  .rd-nav{font:inherit;font-weight:700;font-size:.9rem;cursor:pointer;border:0;background:none;color:var(--brand-ink);padding:8px 4px;display:inline-flex;align-items:center;gap:5px}
+  .rd-nav[disabled]{color:var(--ink-soft);opacity:.4;cursor:default}
+  .rd-nav.next{justify-self:end}
+  .rd-here{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:.9rem;color:var(--ink);white-space:nowrap}
+</style>
+</head>
+<body>
+
+<header class="appbar">
+  <div class="appbar-in">
+    <a href="#/" id="brand-link" style="display:flex;align-items:center;gap:11px;text-decoration:none">
+      <img class="mt-logo" src="assets/mtown-logo.webp" alt="Mtown">
+      <span class="divider"></span>
+      <span class="wordmark" id="wordmark">連載マンガ アーカイブ</span>
+    </a>
+    <span class="spacer"></span>
+    <button class="backlink" id="btn-tolist" hidden>‹ 一覧へ</button>
+  </div>
+</header>
+
+<!-- ================= 一覧 ================= -->
+<main id="view-list">
+  <h1 class="vh" id="h1-text">Jom! マレーシア！ 連載マンガ アーカイブ</h1>
+
+  <section class="hero">
+    <div class="hero-in">
+      <picture>
+        <source media="(min-width:640px)" srcset="assets/banner-pc.webp">
+        <img class="banner" src="assets/banner-sp.webp"
+             alt="Jom! マレーシア！ 全話アーカイブ公開！ 第1話から最新話まで、もちろん無料で読めます。">
+      </picture>
+      <div class="hero-cta">
+        <button class="btn btn-fill" id="cta-first">第1話から読む</button>
+        <button class="btn btn-line" id="cta-latest">最新話を読む</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="tabsec">
+    <div class="tabsec-in">
+      <div class="tablist" role="tablist" id="tablist">
+        <button role="tab" id="tb-about"   aria-controls="tp-about"   aria-selected="true">この漫画について</button>
+        <button role="tab" id="tb-cast"    aria-controls="tp-cast"    aria-selected="false">登場人物</button>
+        <button role="tab" id="tb-contact" aria-controls="tp-contact" aria-selected="false">おといあわせ</button>
+      </div>
+
+      <div class="tabpanel" role="tabpanel" id="tp-about" aria-labelledby="tb-about">
+        <p class="panel-lead" id="about-lead"></p>
+        <div class="author" id="about-author"></div>
+      </div>
+
+      <div class="tabpanel" role="tabpanel" id="tp-cast" aria-labelledby="tb-cast" hidden>
+        <div class="cast-grid" id="cast-grid"></div>
+      </div>
+
+      <div class="tabpanel" role="tabpanel" id="tp-contact" aria-labelledby="tb-contact" hidden>
+        <div class="contact-card" id="contact-card"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="listbar">
+      <label class="search">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="search" id="q" placeholder="話数・タイトルで検索" aria-label="検索">
+      </label>
+      <div class="seg" role="group" aria-label="並び替え">
+        <button id="sort-new" aria-pressed="true">新しい順</button>
+        <button id="sort-old" aria-pressed="false">古い順</button>
+      </div>
+      <span class="total"><b id="total-n">0</b>話</span>
+    </div>
+    <ul class="eplist" id="eplist"></ul>
+    <p class="empty" id="empty" hidden>該当する話が見つかりませんでした。</p>
+  </div>
+
+  <footer class="site">
+    <img class="mt-logo" src="assets/mtown-logo.webp" alt="Mtown">
+    <p id="footer-cr"></p>
+  </footer>
+</main>
+
+<!-- ================= 読む ================= -->
+<main id="view-reader" aria-live="polite">
+  <div class="rd-tabs" id="rd-tabs" hidden>
+    <button id="tab-honpen" aria-pressed="true">本編</button>
+    <button id="tab-omake" aria-pressed="false">おまけ</button>
+  </div>
+  <div class="stage"><div class="stage-in" id="stage"></div><div class="endcard" id="endcard"></div></div>
+  <div class="rd-footer">
+    <div class="rd-footer-in">
+      <button class="rd-nav prev" id="nav-prev">‹ 前の話</button>
+      <span class="rd-here" id="nav-here">—</span>
+      <button class="rd-nav next" id="nav-next">次の話 ›</button>
+    </div>
+  </div>
+</main>
+
+<script src="site.js"></script>
+<script src="episodes.js"></script>
+<script>
+(function(){
+  "use strict";
+  var SITE = window.SITE || {};
+  var CHARS = window.CHARACTERS || [];
+  var EPS = (window.EPISODES || []).slice().map(function(e){
+    var kind = e.kind || "episode";
+    var id = (e.id != null) ? String(e.id) : String(e.no);
+    var sort = (e.sort != null) ? e.sort : (e.no != null ? e.no : 0);
+    var title = e.title || (kind==="special" ? (e.label||"特別回") : "第"+e.no+"話");
+    var o = {}; for(var k in e){ o[k]=e[k]; }
+    o.kind=kind; o.id=id; o.sort=sort; o.title=title;
+    return o;
+  }).sort(function(a,b){ return a.sort-b.sort; });
+  var byId = {}; EPS.forEach(function(e){ byId[e.id]=e; });
+  var ORDER = EPS.map(function(e){ return e.id; });
+
+  var titleText = SITE.title || "連載マンガ アーカイブ";
+  var baseTitle = titleText.replace(/連載マンガ\s*/,"").trim() || titleText;
+  document.title = baseTitle;
+  document.getElementById("h1-text").textContent = titleText;
+  document.getElementById("wordmark").textContent = SITE.wordmark || "連載マンガ アーカイブ";
+  document.getElementById("footer-cr").textContent =
+    (SITE.footer || "© 連載マンガ") + "　掲載: 週刊情報誌 Mtown（mtown.my）";
+
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
+  function fmtDate(d){var m=/^(\d{4})-(\d{2})/.exec(d||"");return m?m[1]+"."+m[2]:"";}
+  function headLabel(e){return e.kind==="special"?(e.label||e.title||"特別回"):("第"+e.no+"話");}
+  function readVerb(e){return headLabel(e)+"を読む";}
+  function isDefTitle(e){return !e.title || e.title===headLabel(e) || e.title===(e.label||"");}
+  function honpenOf(e){return (e.honpen&&e.honpen.length)?e.honpen:(e.thumb?[e.thumb]:[]);}
+
+  /* ---------- タブ内容 ---------- */
+  (function fillTabs(){
+    var A = SITE.about || {};
+    document.getElementById("about-lead").textContent = A.lead || "";
+    var au = A.author, abox = document.getElementById("about-author");
+    if(au){
+      abox.innerHTML =
+        '<div class="mono" aria-hidden="true">'+esc((au.name||"作").replace(/^[©©\s]+/,"").trim().slice(0,1) || "作")+'</div>'+
+        '<div><div class="nm">'+esc(au.name||"")+'</div>'+
+        (au.bio ? '<div class="bio">'+esc(au.bio)+'</div>' : '')+'</div>';
+    } else { abox.hidden = true; }
+
+    var row = document.getElementById("cast-grid");
+    CHARS.forEach(function(c){
+      var d = document.createElement("div");
+      d.className = "cast-item";
+      d.innerHTML =
+        '<div class="cast-pic"><img src="assets/char-'+esc(c.slug)+'.webp" alt="'+esc(c.name)+'" loading="lazy"></div>'+
+        '<div>'+
+          '<div class="cast-head">'+
+            '<span class="cast-name">'+esc(c.name)+'</span>'+
+            (c.age?'<span class="cast-age">'+esc(c.age)+'歳</span>':'')+
+            (c.role?'<span class="cast-role">'+esc(c.role)+'</span>':'')+
+          '</div>'+
+          (c.sub?'<div class="cast-sub">'+esc(c.sub)+'</div>':'')+
+          (c.desc?'<div class="cast-desc">'+esc(c.desc)+'</div>':'')+
+        '</div>';
+      row.appendChild(d);
+    });
+
+    var C = SITE.contact || {};
+    var rows = "";
+    rows += '<div><dt>発行</dt><dd>'+esc(C.org||"")+'</dd></div>';
+    if(C.url) rows += '<div><dt>URL</dt><dd><a href="'+esc(C.url)+'" target="_blank" rel="noopener">'+esc(C.url)+'</a></dd></div>';
+    if(C.tel) rows += '<div><dt>連絡先</dt><dd><a class="tel" href="tel:'+esc(C.tel.replace(/[^0-9]/g,""))+'">'+esc(C.tel)+'</a>'+(C.person?'　（担当：'+esc(C.person)+'）':'')+'</dd></div>';
+    document.getElementById("contact-card").innerHTML =
+      '<h3>'+esc(C.heading||"お問い合わせ")+'</h3><dl>'+rows+'</dl>';
+  })();
+
+  /* ---------- タブ切替 ---------- */
+  var tabIds = ["about","cast","contact"];
+  function selectTab(name){
+    tabIds.forEach(function(t){
+      var on = t===name;
+      document.getElementById("tb-"+t).setAttribute("aria-selected", on);
+      document.getElementById("tp-"+t).hidden = !on;
+    });
+  }
+  tabIds.forEach(function(t){
+    document.getElementById("tb-"+t).addEventListener("click", function(){ selectTab(t); });
+  });
+
+  /* ---------- 一覧 ---------- */
+  var listEl=document.getElementById("eplist"), emptyEl=document.getElementById("empty");
+  var qEl=document.getElementById("q"), order="new";
+  function currentList(){
+    var q=qEl.value.trim().toLowerCase();
+    var arr=EPS.filter(function(e){
+      if(!q) return true;
+      return (e.no!=null && (String(e.no).indexOf(q)>-1 || ("第"+e.no+"話").indexOf(q)>-1))
+        || (e.label && e.label.toLowerCase().indexOf(q)>-1)
+        || (e.title && e.title.toLowerCase().indexOf(q)>-1);
+    });
+    return arr.slice().sort(function(a,b){ return order==="new" ? b.sort-a.sort : a.sort-b.sort; });
+  }
+  function renderList(){
+    var arr=currentList();
+    listEl.innerHTML="";
+    arr.forEach(function(e){
+      var sp=e.kind==="special";
+      var li=document.createElement("li");
+      li.className="ep"+(sp?" ep--sp":""); li.tabIndex=0; li.setAttribute("role","button");
+      li.setAttribute("aria-label",headLabel(e)+"を読む");
+      var date=fmtDate(e.date);
+      var left=sp
+        ? '<div class="ep-badge-sp">特別回</div>'
+        : '<div class="ep-no"><i>第</i><b>'+e.no+'</b><i>話</i></div>';
+      li.innerHTML=
+        left+
+        '<div class="ep-body">'+
+          '<div class="ep-title">'+(isDefTitle(e)?esc(headLabel(e)):esc(e.title))+'</div>'+
+          '<div class="ep-sub">'+
+            (sp&&e.sponsor?'<span class="ep-between">'+esc(e.sponsor)+'</span>':'')+
+            (date?'<span class="ep-date">'+date+'</span>':'')+
+            (e.omake&&e.omake.length?'<span class="chip">おまけ付き</span>':'')+
+          '</div>'+
+        '</div>'+
+        '<img class="ep-thumb" loading="lazy" src="'+esc(e.thumb||honpenOf(e)[0]||"")+'" alt="">';
+      li.addEventListener("click",function(){ go("#/"+e.id); });
+      li.addEventListener("keydown",function(ev){ if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();go("#/"+e.id);} });
+      listEl.appendChild(li);
+    });
+    emptyEl.hidden=arr.length>0;
+    document.getElementById("total-n").textContent=EPS.filter(function(e){return e.kind==="episode";}).length;
+  }
+  qEl.addEventListener("input",renderList);
+  document.getElementById("sort-new").addEventListener("click",function(){setOrder("new");});
+  document.getElementById("sort-old").addEventListener("click",function(){setOrder("old");});
+  function setOrder(o){
+    order=o;
+    document.getElementById("sort-new").setAttribute("aria-pressed",o==="new");
+    document.getElementById("sort-old").setAttribute("aria-pressed",o==="old");
+    renderList();
+  }
+  document.getElementById("cta-first").addEventListener("click",function(){ if(ORDER.length) go("#/"+ORDER[0]); });
+  document.getElementById("cta-latest").addEventListener("click",function(){
+    for(var i=EPS.length-1;i>=0;i--){ if(EPS[i].kind==="episode"){ go("#/"+EPS[i].id); return; } }
+    if(ORDER.length) go("#/"+ORDER[ORDER.length-1]);
+  });
+
+  /* ---------- 読む ---------- */
+  var stage=document.getElementById("stage"), endcard=document.getElementById("endcard");
+  var rdTabs=document.getElementById("rd-tabs"), tabH=document.getElementById("tab-honpen"), tabO=document.getElementById("tab-omake");
+  var navPrev=document.getElementById("nav-prev"), navNext=document.getElementById("nav-next"), navHere=document.getElementById("nav-here");
+  var btnToList=document.getElementById("btn-tolist");
+  function idxOf(id){ return ORDER.indexOf(id); }
+  function preload(src){ if(src){ var i=new Image(); i.src=src; } }
+
+  function renderReader(id, section){
+    var e=byId[id];
+    if(!e){ go("#/"); return; }
+    var i=idxOf(id), hasO=e.omake&&e.omake.length;
+    var mode=(section==="omake"&&hasO)?"omake":"honpen";
+    document.body.classList.add("reading");
+    btnToList.hidden=false;
+    window.scrollTo(0,0);
+
+    rdTabs.hidden=!hasO;
+    tabH.setAttribute("aria-pressed",mode==="honpen");
+    tabO.setAttribute("aria-pressed",mode==="omake");
+
+    var pages=mode==="omake"?e.omake:honpenOf(e);
+    stage.innerHTML="";
+    pages.forEach(function(src){
+      var img=document.createElement("img");
+      img.src=src; img.alt=headLabel(e)+(mode==="omake"?" おまけ":"");
+      stage.appendChild(img);
+    });
+
+    var nextId=ORDER[i+1], prevId=ORDER[i-1];
+    endcard.innerHTML="";
+    if(mode==="honpen"){
+      if(nextId!=null){
+        var b=document.createElement("button");
+        b.className="next-big disp";
+        b.innerHTML=esc(readVerb(byId[nextId]))+' ›<span>つづけて読む</span>';
+        b.addEventListener("click",function(){ go("#/"+nextId); });
+        endcard.appendChild(b);
+      }else{
+        var d=document.createElement("div");
+        d.className="done"; d.textContent="最新話まで読みました。次回をお楽しみに。";
+        endcard.appendChild(d);
+      }
+      if(hasO){
+        var o=document.createElement("button");
+        o.className="to-list"; o.textContent="この回のおまけを見る";
+        o.addEventListener("click",function(){ go("#/"+id+"/omake"); });
+        endcard.appendChild(o);
+      }
+    }else{
+      var bk=document.createElement("button");
+      bk.className="to-list"; bk.textContent="‹ 本編に戻る";
+      bk.addEventListener("click",function(){ go("#/"+id); });
+      endcard.appendChild(bk);
+    }
+    var tl=document.createElement("button");
+    tl.className="to-list"; tl.textContent="話の一覧へ";
+    tl.addEventListener("click",function(){ go("#/"); });
+    endcard.appendChild(tl);
+
+    navHere.textContent=e.kind==="special"?headLabel(e):("第 "+e.no+" 話");
+    navPrev.disabled=prevId==null; navNext.disabled=nextId==null;
+    navPrev.onclick=function(){ if(prevId!=null) go("#/"+prevId); };
+    navNext.onclick=function(){ if(nextId!=null) go("#/"+nextId); };
+    tabH.onclick=function(){ go("#/"+id); };
+    tabO.onclick=function(){ go("#/"+id+"/omake"); };
+    if(nextId!=null) preload(honpenOf(byId[nextId])[0]);
+    if(prevId!=null) preload(honpenOf(byId[prevId])[0]);
+    document.title=headLabel(e)+" ｜ "+baseTitle;
+  }
+  function showList(){
+    document.body.classList.remove("reading");
+    btnToList.hidden=true;
+    document.title=baseTitle;
+    renderList();
+  }
+  btnToList.addEventListener("click",function(){ go("#/"); });
+  document.getElementById("brand-link").addEventListener("click",function(ev){ ev.preventDefault(); go("#/"); });
+  document.addEventListener("keydown",function(ev){
+    if(!document.body.classList.contains("reading")) return;
+    if(ev.key==="Escape") go("#/");
+    else if(ev.key==="ArrowRight"&&!navNext.disabled) navNext.click();
+    else if(ev.key==="ArrowLeft"&&!navPrev.disabled) navPrev.click();
+  });
+
+  /* ---------- router ---------- */
+  function go(hash){ if(location.hash===hash) route(); else location.hash=hash; }
+  function route(){
+    var parts=location.hash.replace(/^#\/?/,"").split("/").filter(Boolean);
+    var key=parts[0]?decodeURIComponent(parts[0]):"";
+    if(key && byId[key]) renderReader(key, parts[1]);
+    else showList();
+  }
+  window.addEventListener("hashchange",route);
+
+  if(!EPS.length){
+    listEl.innerHTML='<li class="empty">まだ話が登録されていません。images/1/ に第1話.pdf を入れて「更新.bat」を実行してください。</li>';
+  }
+  route();
+})();
+</script>
+</body>
+</html>

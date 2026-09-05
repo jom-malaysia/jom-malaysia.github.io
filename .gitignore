@@ -1,0 +1,14 @@
+# 元素材（サイトには不要・重い）
+HP素材/
+
+# 各話の元PDF（サイトに配信されるのは _pages/ の画像。PDFは手元だけにある）
+images/**/*.pdf
+
+# 自動生成・作業ファイル
+.build_cache.json
+*.log
+_build.log
+_preview.html
+__pycache__/
+*.pyc
+_shots/
