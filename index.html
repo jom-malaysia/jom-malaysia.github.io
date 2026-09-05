@@ -179,18 +179,19 @@
   .author .nm{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:1rem}
   .author .bio{font-size:.86rem;color:var(--ink-soft);margin-top:2px;line-height:1.6}
 
-  .cast-grid{display:grid;gap:11px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+  .cast-grid{display:grid;gap:13px;grid-template-columns:repeat(2,1fr)}
+  @media (max-width:560px){ .cast-grid{grid-template-columns:1fr} }
   .cast-item{
-    display:grid;grid-template-columns:74px 1fr;gap:12px;align-items:start;
-    background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:11px 12px;
+    display:grid;grid-template-columns:88px 1fr;gap:14px;align-items:start;
+    background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:13px 14px;
   }
-  .cast-pic{width:74px;height:74px;border-radius:10px;overflow:hidden;background:var(--wash);border:1px solid var(--line)}
+  .cast-pic{width:88px;height:88px;border-radius:10px;overflow:hidden;background:var(--wash);border:1px solid var(--line)}
   .cast-pic img{width:100%;height:100%;object-fit:cover;object-position:top center}
-  .cast-head{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
-  .cast-name{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:.98rem}
-  .cast-age{font-size:.72rem;color:var(--ink-soft);font-weight:700}
-  .cast-sub{font-size:.73rem;color:var(--brand-ink);font-weight:700;margin-top:2px}
-  .cast-desc{font-size:.77rem;color:var(--ink-soft);line-height:1.55;margin-top:4px}
+  .cast-head{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}
+  .cast-name{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:1.12rem}
+  .cast-age{font-size:.8rem;color:var(--ink-soft);font-weight:700}
+  .cast-sub{font-size:.82rem;color:var(--brand-ink);font-weight:700;margin-top:3px}
+  .cast-desc{font-size:.88rem;color:var(--ink-soft);line-height:1.65;margin-top:5px}
 
   .contact-card{
     background:var(--wash);border:1px solid var(--line);border-radius:12px;
@@ -226,34 +227,15 @@
   .rd-tabs button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
   .rd-tabs[hidden]{display:none}
 
-  .stage{background:var(--stage);padding:16px 0 118px;margin-top:12px}
-  .stage-in{max-width:900px;margin:0 auto;padding:0 12px;display:flex;flex-direction:column;gap:12px}
+  .stage{background:var(--stage);padding:8px 0 52px;margin-top:0}
+  .stage-in{max-width:920px;margin:0 auto;padding:0 8px;display:flex;flex-direction:column;gap:10px}
   .stage-in img{
-    width:calc(min(100%, 860px) * var(--zoom, 1));
+    width:calc(min(100%, 900px) * var(--zoom, 1));
     height:auto;border-radius:4px;background:#fff;cursor:zoom-in;
   }
   .stage.zoomed{overflow-x:auto;-webkit-overflow-scrolling:touch}
-  .stage.zoomed .stage-in{max-width:none;width:max-content;align-items:flex-start;padding:0 20px}
+  .stage.zoomed .stage-in{max-width:none;width:max-content;align-items:flex-start;padding:0 16px}
   .stage.zoomed .stage-in img{cursor:zoom-out}
-
-  /* まんがの大きさ変更バー（読書画面の下・ナビの上）*/
-  .rd-zoom{
-    max-width:1040px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:7px;
-    padding-bottom:9px;margin-bottom:8px;border-bottom:1px solid var(--line);
-  }
-  .rd-zoom .zlbl{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:.72rem;color:var(--ink-soft);margin-right:3px}
-  .rd-zoom button{
-    width:40px;height:40px;border-radius:50%;border:0;cursor:pointer;line-height:1;
-    background:var(--brand-ink);color:#fff;font-size:1.4rem;font-weight:700;
-    font-family:"Zen Maru Gothic",sans-serif;display:flex;align-items:center;justify-content:center;
-  }
-  .rd-zoom button:hover{background:var(--brand-deep)}
-  .rd-zoom button:disabled{opacity:.3;cursor:default}
-  .rd-zoom .pct{
-    width:54px;height:auto;background:none;color:var(--ink);font-size:.84rem;
-    font-variant-numeric:tabular-nums;border-radius:8px;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;
-  }
-  .rd-zoom .pct:hover{background:var(--wash)}
 
   .endcard{max-width:900px;margin:6px auto 0;padding:20px 16px 4px;display:flex;flex-direction:column;align-items:center;gap:13px;text-align:center}
   .endcard .done{color:var(--stage-fg);opacity:.72;font-size:.9rem}
@@ -266,12 +248,23 @@
   .next-big span{font-size:.72rem;opacity:.85;font-weight:500;font-family:"Noto Sans JP",sans-serif}
   .to-list{background:none;border:0;color:var(--stage-fg);opacity:.72;font:inherit;font-size:.86rem;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 
-  .rd-footer{position:sticky;bottom:0;z-index:20;background:var(--paper);border-top:1px solid var(--line);padding:9px 18px calc(env(safe-area-inset-bottom) + 9px)}
+  .rd-footer{position:sticky;bottom:0;z-index:20;background:var(--paper);border-top:1px solid var(--line);padding:7px 14px calc(env(safe-area-inset-bottom) + 7px)}
   .rd-footer-in{max-width:1040px;margin:0 auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px}
   .rd-nav{font:inherit;font-weight:700;font-size:.9rem;cursor:pointer;border:0;background:none;color:var(--brand-ink);padding:8px 4px;display:inline-flex;align-items:center;gap:5px}
   .rd-nav[disabled]{color:var(--ink-soft);opacity:.4;cursor:default}
   .rd-nav.next{justify-self:end}
-  .rd-here{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:.9rem;color:var(--ink);white-space:nowrap}
+  .rd-mid{display:flex;align-items:center;gap:9px}
+  .rd-here{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:.88rem;color:var(--ink);white-space:nowrap}
+  /* まんがの大きさ ＋／－（小さく・場所を取らない）*/
+  .rd-zoom{display:inline-flex;align-items:center;gap:5px}
+  .rd-zoom button{
+    width:30px;height:30px;border-radius:50%;border:0;cursor:pointer;line-height:1;flex-shrink:0;
+    background:var(--brand-ink);color:#fff;font-size:1.05rem;font-weight:700;
+    font-family:"Zen Maru Gothic",sans-serif;display:flex;align-items:center;justify-content:center;
+  }
+  .rd-zoom button:hover{background:var(--brand-deep)}
+  .rd-zoom button:disabled{opacity:.28;cursor:default}
+  @media (max-width:400px){ .rd-here{font-size:.8rem} .rd-mid{gap:6px} }
 </style>
 </head>
 <body>
@@ -360,15 +353,15 @@
   <div class="stage" id="stage-wrap"><div class="stage-in" id="stage"></div><div class="endcard" id="endcard"></div></div>
 
   <div class="rd-footer">
-    <div class="rd-zoom" id="zoom-ctl">
-      <span class="zlbl">まんがの大きさ</span>
-      <button id="zoom-out" aria-label="小さくする" title="小さくする">－</button>
-      <button class="pct" id="zoom-pct" aria-label="標準の大きさに戻す" title="標準に戻す">100%</button>
-      <button id="zoom-in" aria-label="大きくする" title="大きくする">＋</button>
-    </div>
     <div class="rd-footer-in">
       <button class="rd-nav prev" id="nav-prev">‹ 前の話</button>
-      <span class="rd-here" id="nav-here">—</span>
+      <div class="rd-mid">
+        <span class="rd-here" id="nav-here">—</span>
+        <span class="rd-zoom" id="zoom-ctl">
+          <button id="zoom-out" aria-label="まんがを元の大きさに" title="元の大きさに戻す">－</button>
+          <button id="zoom-in" aria-label="まんがを大きく" title="大きくする">＋</button>
+        </span>
+      </div>
       <button class="rd-nav next" id="nav-next">次の話 ›</button>
     </div>
   </div>
@@ -533,15 +526,13 @@
     var z=ZOOMS[zi];
     stage.style.setProperty("--zoom", z);
     stageWrap.classList.toggle("zoomed", z>1);
-    document.getElementById("zoom-pct").textContent=Math.round(z*100)+"%";
-    document.getElementById("zoom-out").disabled=(zi<=0);
+    document.getElementById("zoom-out").disabled=(zi<=0);   // － ＝ 元の大きさに戻す
     document.getElementById("zoom-in").disabled=(zi>=ZOOMS.length-1);
     try{ localStorage.setItem("mz", z); }catch(e){}
   }
   function setZoom(n){ zi=Math.max(0, Math.min(ZOOMS.length-1, n)); applyZoom(); }
   document.getElementById("zoom-in").addEventListener("click", function(){ setZoom(zi+1); });
-  document.getElementById("zoom-out").addEventListener("click", function(){ setZoom(zi-1); });
-  document.getElementById("zoom-pct").addEventListener("click", function(){ setZoom(0); });
+  document.getElementById("zoom-out").addEventListener("click", function(){ setZoom(0); });
 
   function renderReader(id, section){
     var e=byId[id];
