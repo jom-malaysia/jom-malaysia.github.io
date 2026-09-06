@@ -7,7 +7,7 @@ window.SITE = {
   /* アクセス解析（Microsoft Clarity）。
      Clarity で「このサイト用の新規プロジェクト」を作り、Setup画面に出る
      10文字ほどのプロジェクトIDをここに貼る（例: "abcd1234ef"）。空なら解析なし。 */
-  clarityId: "",
+  clarityId: "ydvbmbtx59",
 
   /* タブ「この漫画について」 */
   about: {
