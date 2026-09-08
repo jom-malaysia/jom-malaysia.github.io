@@ -19,6 +19,11 @@ window.SITE = {
     }
   },
 
+  /* タブ「リンク」。上から順に表示。logo は assets/ 内の画像ファイル名（省略可） */
+  links: [
+    { label: "Mtown（マレーシア情報誌）", url: "https://www.mtown.my/", logo: "assets/mtown-logo.webp" }
+  ],
+
   /* タブ「おといあわせ」 */
   contact: {
     heading: "お問い合わせはコチラ",

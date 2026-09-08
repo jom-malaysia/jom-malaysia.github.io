@@ -193,6 +193,20 @@
   .cast-sub{font-size:.82rem;color:var(--brand-ink);font-weight:700;margin-top:3px}
   .cast-desc{font-size:.88rem;color:var(--ink-soft);line-height:1.65;margin-top:5px}
 
+  /* リンクタブ */
+  .link-list{display:grid;gap:12px;max-width:460px}
+  .link-card{
+    display:flex;align-items:center;gap:14px;text-decoration:none;
+    background:var(--paper);border:1px solid var(--line);border-radius:12px;
+    box-shadow:var(--shadow);padding:14px 16px;transition:background .12s;
+  }
+  .link-card:hover{background:var(--wash)}
+  .link-card img{height:30px;width:auto;flex-shrink:0}
+  .link-card .lk-body{flex:1;min-width:0}
+  .link-card .lk-label{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:.98rem;color:var(--ink)}
+  .link-card .lk-url{font-size:.78rem;color:var(--ink-soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .link-card .lk-arrow{color:var(--brand-ink);font-size:1.1rem;flex-shrink:0}
+
   .contact-card{
     background:var(--wash);border:1px solid var(--line);border-radius:12px;
     padding:22px 22px;max-width:440px;
@@ -304,6 +318,7 @@
       <div class="tablist" role="tablist" id="tablist">
         <button role="tab" id="tb-about"   aria-controls="tp-about"   aria-selected="true">この漫画について</button>
         <button role="tab" id="tb-cast"    aria-controls="tp-cast"    aria-selected="false">登場人物</button>
+        <button role="tab" id="tb-links"   aria-controls="tp-links"   aria-selected="false">リンク</button>
         <button role="tab" id="tb-contact" aria-controls="tp-contact" aria-selected="false">おといあわせ</button>
       </div>
 
@@ -314,6 +329,10 @@
 
       <div class="tabpanel" role="tabpanel" id="tp-cast" aria-labelledby="tb-cast" hidden>
         <div class="cast-grid" id="cast-grid"></div>
+      </div>
+
+      <div class="tabpanel" role="tabpanel" id="tp-links" aria-labelledby="tb-links" hidden>
+        <div class="link-list" id="link-list"></div>
       </div>
 
       <div class="tabpanel" role="tabpanel" id="tp-contact" aria-labelledby="tb-contact" hidden>
@@ -439,6 +458,15 @@
       row.appendChild(d);
     });
 
+    var LINKS = SITE.links || [];
+    document.getElementById("link-list").innerHTML = LINKS.map(function(k){
+      return '<a class="link-card" href="'+esc(k.url)+'" target="_blank" rel="noopener">'+
+        (k.logo ? '<img src="'+esc(k.logo)+'" alt="">' : '')+
+        '<span class="lk-body"><span class="lk-label">'+esc(k.label||k.url)+'</span>'+
+        '<span class="lk-url">'+esc(k.url)+'</span></span>'+
+        '<span class="lk-arrow" aria-hidden="true">↗</span></a>';
+    }).join("");
+
     var C = SITE.contact || {};
     var rows = "";
     rows += '<div><dt>発行</dt><dd>'+esc(C.org||"")+'</dd></div>';
@@ -449,7 +477,7 @@
   })();
 
   /* ---------- タブ切替 ---------- */
-  var tabIds = ["about","cast","contact"];
+  var tabIds = ["about","cast","links","contact"];
   function selectTab(name){
     tabIds.forEach(function(t){
       var on = t===name;

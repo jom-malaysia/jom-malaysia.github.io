@@ -111,7 +111,7 @@ def do_hpchar(jp, slug):
 
 if __name__ == "__main__":
     print("バナー:")
-    do_banner("PC用バナー.png", "banner-pc.webp", 1500)
+    do_banner("PCバナー.png", "banner-pc.webp", 1500)
     do_banner("スマホ用バナー.png", "banner-sp.webp", 960)
     print("ロゴ:")
     do_logo("Mtownロゴ.jpeg", "mtown-logo.webp", 560)
