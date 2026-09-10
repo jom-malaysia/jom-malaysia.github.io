@@ -331,5 +331,19 @@ window.EPISODES = [
     "omake": [],
     "no": 22,
     "title": "第22話"
+  },
+  {
+    "kind": "episode",
+    "id": "23",
+    "sort": 23.0,
+    "date": "",
+    "note": "",
+    "thumb": "images/23/_pages/_thumb.webp",
+    "honpen": [
+      "images/23/_pages/honpen_01.webp"
+    ],
+    "omake": [],
+    "no": 23,
+    "title": "第23話"
   }
 ];

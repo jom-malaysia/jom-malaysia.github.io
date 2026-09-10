@@ -6,7 +6,11 @@ echo  Jom! Malaysia archive  --  update ^& publish (one click)
 echo ==========================================================
 echo.
 
-echo [1/3] Converting new PDFs into images...
+REM --- make sure git knows who you are (first run only) ---
+git config user.name  >nul 2>&1 || git config --global user.name  "sugitani0713"
+git config user.email >nul 2>&1 || git config --global user.email "sugitani0713@gmail.com"
+
+echo [1/4] Converting new PDFs into images...
 python build.py
 if errorlevel 1 (
   echo.
@@ -18,16 +22,35 @@ if errorlevel 1 (
 )
 
 echo.
-echo [2/3] Saving changes...
+echo [2/4] Staging changes...
 git add -A
-git commit -m "site update"
 
 echo.
-echo [3/3] Publishing...
+echo [3/4] Saving...
+git diff --cached --quiet
+if not errorlevel 1 (
+  echo  ^(no changes to publish - already up to date^)
+  echo.
+  pause
+  exit /b 0
+)
+git commit -m "site update"
+if errorlevel 1 (
+  echo.
+  echo  ERROR: could not save the changes ^(git commit failed^).
+  echo  Take a screenshot of this window and send it.
+  echo.
+  pause
+  exit /b 1
+)
+
+echo.
+echo [4/4] Publishing...
 git push
 if errorlevel 1 (
   echo.
-  echo  Publish failed. Check your internet connection and try again.
+  echo  ERROR: could not publish ^(git push failed^).
+  echo  Check your internet connection and try again.
   echo.
   pause
   exit /b 1
