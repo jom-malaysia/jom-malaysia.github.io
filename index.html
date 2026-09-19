@@ -436,7 +436,7 @@
     var au = A.author, abox = document.getElementById("about-author");
     if(au){
       abox.innerHTML =
-        '<img class="author-pic" src="assets/author.webp" alt="" loading="lazy">'+
+        '<img class="author-pic" src="assets/author.webp?v=2" alt="" loading="lazy">'+
         '<div><div class="nm">'+esc(au.name||"")+'</div>'+
         (au.bio ? '<div class="bio">'+esc(au.bio)+'</div>' : '')+'</div>';
     } else { abox.hidden = true; }
