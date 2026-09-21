@@ -359,5 +359,24 @@ window.EPISODES = [
     "omake": [],
     "no": 24,
     "title": "第24話"
+  },
+  {
+    "kind": "special",
+    "id": "s24_25",
+    "sort": 24.5,
+    "date": "",
+    "note": "",
+    "thumb": "images/24-25特別回/_pages/_thumb.webp",
+    "honpen": [
+      "images/24-25特別回/_pages/honpen_01.webp"
+    ],
+    "omake": [],
+    "label": "特別回",
+    "between": [
+      24,
+      25
+    ],
+    "sponsor": "河本さんの甘酒『準甘』とは？",
+    "title": "特別回"
   }
 ];
