@@ -378,5 +378,19 @@ window.EPISODES = [
     ],
     "sponsor": "河本さんの甘酒『準甘』とは？",
     "title": "特別回"
+  },
+  {
+    "kind": "episode",
+    "id": "25",
+    "sort": 25.0,
+    "date": "",
+    "note": "",
+    "thumb": "images/25/_pages/_thumb.webp",
+    "honpen": [
+      "images/25/_pages/honpen_01.webp"
+    ],
+    "omake": [],
+    "no": 25,
+    "title": "第25話"
   }
 ];
