@@ -392,5 +392,19 @@ window.EPISODES = [
     "omake": [],
     "no": 25,
     "title": "第25話"
+  },
+  {
+    "kind": "episode",
+    "id": "26",
+    "sort": 26.0,
+    "date": "",
+    "note": "",
+    "thumb": "images/26/_pages/_thumb.webp",
+    "honpen": [
+      "images/26/_pages/honpen_01.webp"
+    ],
+    "omake": [],
+    "no": 26,
+    "title": "第26話"
   }
 ];
