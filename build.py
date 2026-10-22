@@ -54,7 +54,9 @@ PAGE_EXT = "webp"      # 生成する画像フォーマット（軽量化のた�
 OMAKE_RE = re.compile(r"(おまけ|オマケ|omake|bonus|extra|付録)", re.I)
 HONPEN_RE = re.compile(r"(本編|第?\s*\d+\s*話|特別|広告|PR|honpen|main|ep\d+)", re.I)
 # 特別回フォルダ:  「15-16特別回」「15_16 PR」「15-16」など
-SPECIAL_RE = re.compile(r"^(\d+)\s*[-_〜~ー－]\s*(\d+)\s*(.*)$")
+# 同じ間（例: 26と27の間）に2本目以降を置く場合は「26-27-2 特別回」のように
+# 2つ目の数字の直後へ「-N」を続ける（Nが無ければ常に1本目として扱う）。
+SPECIAL_RE = re.compile(r"^(\d+)\s*[-_〜~ー－]\s*(\d+)(?:[-_](\d+))?\s*(.*)$")
 
 
 def read_text(path):
@@ -112,10 +114,21 @@ def classify_folder(name):
     m = SPECIAL_RE.match(name)
     if m:
         a, b = int(m.group(1)), int(m.group(2))
-        label = (m.group(3).strip() or "特別回")
+        sub = m.group(3)
+        label = (m.group(4).strip() or "特別回")
+        # 同じ(a,b)間に複数の特別回があるとき、id/sort が重複するとサイト側の
+        # ルーティング(byId)が衝突し、違う方の内容が開いてしまう。
+        # -N 付きは枝番として id/sort を分離する。
+        if sub:
+            n = int(sub)
+            sid = f"s{a}_{b}_{n}"
+            sort = a + 0.5 + n * 0.001
+        else:
+            sid = f"s{a}_{b}"
+            sort = a + 0.5
         return {
             "kind": "special", "between": [a, b], "label": label,
-            "sort": a + 0.5, "id": f"s{a}_{b}",
+            "sort": sort, "id": sid,
         }
     return None
 

@@ -413,25 +413,6 @@ window.EPISODES = [
     "sort": 26.5,
     "date": "",
     "note": "",
-    "thumb": "images/26-27-2 特別回/_pages/_thumb.webp",
-    "honpen": [
-      "images/26-27-2 特別回/_pages/honpen_01.webp"
-    ],
-    "omake": [],
-    "label": "-2 特別回",
-    "between": [
-      26,
-      27
-    ],
-    "sponsor": "10_22特別回",
-    "title": "-2 特別回"
-  },
-  {
-    "kind": "special",
-    "id": "s26_27",
-    "sort": 26.5,
-    "date": "",
-    "note": "",
     "thumb": "images/26-27特別回/_pages/_thumb.webp",
     "honpen": [
       "images/26-27特別回/_pages/honpen_01.webp"
@@ -443,6 +424,25 @@ window.EPISODES = [
       27
     ],
     "sponsor": "河本さん準甘の秘密を語る",
+    "title": "特別回"
+  },
+  {
+    "kind": "special",
+    "id": "s26_27_2",
+    "sort": 26.502,
+    "date": "",
+    "note": "",
+    "thumb": "images/26-27-2 特別回/_pages/_thumb.webp",
+    "honpen": [
+      "images/26-27-2 特別回/_pages/honpen_01.webp"
+    ],
+    "omake": [],
+    "label": "特別回",
+    "between": [
+      26,
+      27
+    ],
+    "sponsor": "10_22特別回",
     "title": "特別回"
   }
 ];
