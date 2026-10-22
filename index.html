@@ -548,8 +548,7 @@
   }
   document.getElementById("cta-first").addEventListener("click",function(){ if(ORDER.length) go("#/"+ORDER[0]); });
   document.getElementById("cta-latest").addEventListener("click",function(){
-    for(var i=EPS.length-1;i>=0;i--){ if(EPS[i].kind==="episode"){ go("#/"+EPS[i].id); return; } }
-    if(ORDER.length) go("#/"+ORDER[ORDER.length-1]);
+    if(EPS.length) go("#/"+EPS[EPS.length-1].id);
   });
 
   /* ---------- 読む ---------- */
