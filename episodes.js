@@ -442,7 +442,7 @@ window.EPISODES = [
       26,
       27
     ],
-    "sponsor": "10_22特別回",
+    "sponsor": "日本人の僕ができること？",
     "title": "特別回"
   }
 ];
