@@ -444,5 +444,19 @@ window.EPISODES = [
     ],
     "sponsor": "日本人の僕ができること？",
     "title": "特別回"
+  },
+  {
+    "kind": "episode",
+    "id": "27",
+    "sort": 27.0,
+    "date": "",
+    "note": "",
+    "thumb": "images/27/_pages/_thumb.webp",
+    "honpen": [
+      "images/27/_pages/honpen_01.webp"
+    ],
+    "omake": [],
+    "no": 27,
+    "title": "第27話"
   }
 ];
